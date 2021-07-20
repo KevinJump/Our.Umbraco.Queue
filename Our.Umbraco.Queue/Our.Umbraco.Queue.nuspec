@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+	<metadata>
+		<id>Our.Umbraco.Queue</id>
+		<version>2.0</version>
+		<title>The Queue for Umbraco 8</title>
+		<authors>Kevin Jump</authors>
+		<owners>Jumoo</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Send things to a background queue for processing.</description>
+		<summary></summary>
+		<releaseNotes>
+			1.0 - Publish Queue for Umbraco 7
+			2.0 - TheQueue for Umbraco 8
+		</releaseNotes>
+		<tags>umbraco</tags>
+		<repository type="git" url="https://github.com/KevinJump/TheQueue" />
+	</metadata>
+	<files>
+		<file src=".\readme.txt" target="readme.txt" />
+		<file src=".\bin\$Configuration$\Our.Umbraco.Queue.dll" target="lib\net472" />
+		<file src=".\App_Plugins\TheQueue\**\*.*" target="content\App_Plugins\TheQueue" />
+	</files>
+</package>

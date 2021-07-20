@@ -1,0 +1,67 @@
+<div ng-controller="sendToQueueController as vm">
+    <div class="umb-dialog-body with-footer form-horizontal">
+        <div class="umb-pane">
+            <p class="abstract">
+                Send this bit of content to the queue.
+            </p>
+
+
+            <div class="queue-option">
+                <umb-checkbox input-id="includeChildren"
+                              name="includeChildren"
+                              model="vm.includeChildren"
+                              class="queue-option-checkbox"></umb-checkbox>
+
+                <div>
+                    <label for="includeChildren">
+                        <span class="queue-option-name">Include children</span>
+                        <span class="queue-option-note">Put all child items in the queue</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="queue-option-child" ng-if="vm.includeChildren">
+                <div class="queue-option">
+                    <umb-checkbox input-id="includeUnpublished"
+                                  name="includeUnpublished"
+                                  model="vm.includeUnpublished"
+                                  class="queue-option-checkbox"></umb-checkbox>
+
+                    <div>
+                        <label for="includeUnpublished">
+                            <span class="queue-option-name">Include unpublished</span>
+                            <span class="queue-option-note">Include drafts and unpublished items</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div ng-if="vm.status.count > 0">
+                <div class="progress">
+                    <div class="bar" role="progressbar" style="width: {{vm.calcPercentage(vm.status)}}%;" aria-valuenow="{{vm.calcPercentage(vm.status)}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="text-center"><strong>{{vm.status.title}}</strong></div>
+                <div class="text-center">{{vm.status.message}}</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+
+        <umb-button type="button"
+                    button-style="link"
+                    action="vm.close()"
+                    label-key="general_close">
+        </umb-button>
+
+        <umb-button type="button"
+                    action="vm.queue()"
+                    state="vm.buttonState"
+                    button-style="success"
+                    label-key="queue_sendToQueue"
+                    ng-if="vm.sent == false">
+        </umb-button>
+
+    </div>
+</div>

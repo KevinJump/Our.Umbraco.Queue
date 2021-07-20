@@ -1,0 +1,91 @@
+﻿<div ng-controller="theQueueDashboardController as vm">
+    <div ng-if="!vm.loading">
+
+        <div class="alert alert-info" ng-if="!vm.backgroundOn">
+            <localize key="queue_backgroundOff"></localize>
+        </div>
+
+        <umb-box>
+            <umb-box-header title="The Queue."
+                            description="Process items in queue order">
+
+                <span ng-if="vm.status.isProcessing">Approx</span>
+                <strong>{{vm.status.queueSize}} items in queue</strong>
+
+                <umb-button action="vm.process()"
+                            button-style="action"
+                            type="button"
+                            label="Process"
+                            disabled="vm.status.processing"></umb-button>
+
+            </umb-box-header>
+            <div class="progress queue-size-bar">
+                <div class="bar" role="progressbar" style="width: {{vm.calcQueuePercent()}}%;" aria-valuenow="{{vm.calcQueuePercent()}}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </umb-box>
+
+        <umb-box ng-if="vm.status.isProcessing">
+            <umb-box-content>
+                <div class="progress">
+                    <div class="bar" role="progressbar" style="width: {{vm.calcProgress()}}%;" aria-valuenow="{{vm.calcProgress()}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="text-center">
+                    <strong>Processing</strong><br />
+                    {{vm.status.processed}} / {{vm.status.processed + vm.status.remaining}}
+                </div>
+            </umb-box-content>
+        </umb-box>
+
+        <div ng-if="vm.queue.items.length > 0">
+
+            <div class="umb-table">
+                <div class="umb-table-head">
+                    <div class="umb-table-row">
+                        <div class="umb-table-cell"><!-- icon --></div>
+                        <div class="umb-table-cell umb-table__name">Name</div>
+                        <div class="umb-table-cell">Action</div>
+                        <div class="umb-table-cell">Priority</div>
+                        <div class="umb-table-cell">Submitted</div>
+                        <div class="umb-table-cell">Retrys</div>
+                        <div class="umb-table-cell"><!-- buttons --></div>
+                    </div>
+                </div>
+
+                <div class="umb-table-body">
+                    <div class="umb-table-row"
+                         ng-repeat="item in vm.queue.items">
+
+                        <div class="umb-table-cell"><i class="umb-table-body__icon umb-table-body__fileicon icon-document"></i><!-- icon --></div>
+                        <div class="umb-table-cell umb-table__name">{{item.name}}</div>
+                        <div class="umb-table-cell">{{vm.showAction(item.action)}}</div>
+                        <div class="umb-table-cell">{{vm.showPriority(item.priority)}}</div>
+                        <div class="umb-table-cell">{{item.submitted | date: 'medium' }}</div>
+                        <div class="umb-table-cell">{{item.attempt}}</div>
+                        <div class="umb-table-cell">
+                            <!-- <umb-button action="vm.pick(item.id)" button-style="primary btn-sm" label="process" type="button"></umb-button>-->
+                            <!-- buttons -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <umb-pagination page-number="vm.queue.pageNumber"
+                                total-pages="vm.queue.totalPages"
+                                on-next="vm.nextPage"
+                                on-prev="vm.prevPage"
+                                on-go-to-page="vm.goToPage">
+                </umb-pagination>
+            </div>
+        </div>
+
+        <div class="queue-empty-view" ng-if="vm.queue.items.length == 0">
+            <umb-empty-state>
+                <h2>The queue is empty</h2>
+            </umb-empty-state>
+        </div>
+    </div>
+
+
+
+</div>

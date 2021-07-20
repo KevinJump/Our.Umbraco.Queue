@@ -1,0 +1,56 @@
+﻿
+.queue-option {
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.queue-option-child .queue-option {
+    padding-left: 15px;
+}
+
+
+.queue-option-checkbox {
+    padding: 0 5px;
+}
+
+.queue-option .queue-option-name {
+    display: block;
+    font-weight: bold;
+}
+
+.queue-option .queue-option-node {
+    display: block;
+    color: #817f85;
+    font-size: small;
+}
+
+.queue-size-bar {
+    padding: 0;
+    border-radius: 0;
+    height: 2px;
+}
+
+    .queue-size-bar .bar {
+        background-color: green;
+        background-image: none;
+        box-shadow: none;
+    }
+
+
+.queue-empty-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+    .queue-empty-view .umb-empty-state {
+        color: #ddd;
+    }

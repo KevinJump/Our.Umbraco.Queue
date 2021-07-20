@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<language>
+	<area alias="dashboardTabs">
+		<key alias="theQueue">The Queue</key>
+	</area>
+	<area alias="actions">
+		<key alias="queue">Send to Queue</key>
+	</area>
+	<area alias="actionDescriptions">
+		<key alias="queue">Send content to the queue for publication</key>
+	</area>
+	<area alias="queue">
+		<key alias="sendToQueue">Send to Queue</key>
+		<key alias="backgroundOff"><![CDATA[Background processing of the queue is Off, you will need to click process for the queue to empty]]></key>
+	</area>
+
+</language>

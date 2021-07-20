@@ -1,0 +1,20 @@
+{
+  "javascript": [
+    "~/App_Plugins/TheQueue/queueHub.js",
+    "~/App_Plugins/TheQueue/queueService.js",
+    "~/App_Plugins/TheQueue/dashboardController.js",
+    "~/App_Plugins/TheQueue/sendToQueueController.js"
+  ],
+  "css": [
+    "~/App_Plugins/TheQueue/thequeue.css"
+  ],
+  "dashboards": [
+    {
+      "sections": [ "settings" ],
+      "alias": "theQueue",
+      "view": "~/App_Plugins/TheQueue/dashboard.html",
+      "weight": 10
+    }
+  ]
+
+}
