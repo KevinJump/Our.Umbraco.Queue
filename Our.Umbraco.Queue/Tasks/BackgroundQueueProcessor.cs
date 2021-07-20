@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace Our.Umbraco.Queue.Tasks
         private readonly IRuntimeState runtimeState;
         private readonly IUmbracoContextFactory umbracoContextFactory;
 
+        private readonly int BatchSize = 200;
+
         public BackgroundQueueProcessor(
             IBackgroundTaskRunner<RecurringTaskBase> runner, 
             int delayMilliseconds, 
@@ -35,6 +38,12 @@ namespace Our.Umbraco.Queue.Tasks
             this.queueService = queueService;
             this.runtimeState = runtimeState;
             this.umbracoContextFactory = umbracoContextFactory;
+
+            var batchSizeAttempt = ConfigurationManager.AppSettings["TheQueue.BatchSize"]?.TryConvertTo<int>();
+            if (batchSizeAttempt.HasValue && batchSizeAttempt.Value.Success)
+            {
+                BatchSize = batchSizeAttempt.Value.Result;
+            }
         }
 
         public override bool IsAsync => false;
@@ -57,7 +66,7 @@ namespace Our.Umbraco.Queue.Tasks
                         try
                         {
                             var sw = Stopwatch.StartNew();
-                            var count = queueService.ProcessQueue(200);
+                            var count = queueService.ProcessQueue(BatchSize);
                             sw.Stop();
                             logger.Info<BackgroundQueueProcessor>("Processed {count} items in queue in {time}ms", count, sw.ElapsedMilliseconds);
                         }

@@ -36,8 +36,12 @@
 
 	bonus: conifg settings (web.config > appSettings )
 
-	Turn of the background processing of the queue: 
+	- Turn of the background processing of the queue: 
 	    <add key="TheQueue.BackgroundProcessing" value="true" />
     
-	Change how often the queue polls 
-		<add key="THeQueue.BackgroundPeriod" value="120" />
+	- Change how often the queue polls 
+		<add key="TheQueue.BackgroundPeriod" value="120" />
+
+	- Change how many items get done in one 'request'. If publishing
+	  is too slow you may get timeouts processing to many files:
+		<add key="TheQueue.BatchSize" value="200"/>
